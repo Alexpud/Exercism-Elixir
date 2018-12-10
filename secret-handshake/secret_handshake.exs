@@ -17,7 +17,6 @@ defmodule SecretHandshake do
   use Bitwise
   @spec commands(code :: integer) :: list(String.t())
   def commands(code) do 
-    # doubleWink?([], 10)
     []
     |> wink?(code)
     |> doubleWink?(code)
