@@ -3,7 +3,6 @@ defmodule Bob do
     cond do
       yellingQuestion?(input) -> "Calm down, I know what I'm doing!"
       question?(input) && !yelling?(input)-> "Sure."
-      !talkingForcefully?(input) && String.ends_with?(input, "!") && !question?(input) -> "Whatever."
       yelling?(input) -> "Whoa, chill out!"
       String.trim(input) == "" -> "Fine. Be that way!"
       true -> "Whatever."
@@ -12,11 +11,9 @@ defmodule Bob do
 
   def yelling?(input) do
     String.trim(input) != "" &&
-    (((talkingForcefully?(input) ||
-    String.ends_with?(input, "!")) &&
-    hasLetters?(input)) ||
-    (!hasLetters?(input) &&
-     !hasNumbers?(input)))
+    talkingForcefully?(input) &&
+    !String.ends_with?(input, "?") &&
+    not (hasNumbers?(input) && !hasLetters?(input))
   end
 
   def talkingForcefully?(input) do
