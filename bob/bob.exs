@@ -1,7 +1,7 @@
 defmodule Bob do
   def hey(input) do
     cond do
-      yellingQuestion?(input) -> "Calm down, I know what I'm doing!"
+      yelling_question?(input) -> "Calm down, I know what I'm doing!"
       question?(input) && !yelling?(input)-> "Sure."
       yelling?(input) -> "Whoa, chill out!"
       String.trim(input) == "" -> "Fine. Be that way!"
@@ -9,33 +9,33 @@ defmodule Bob do
     end
   end
 
-  def yelling?(input) do
+  defp yelling?(input) do
     String.trim(input) != "" &&
-    talkingForcefully?(input) &&
+    talking_forcefully?(input) &&
     !String.ends_with?(input, "?") &&
-    not (hasNumbers?(input) && !hasLetters?(input))
+    not (has_numbers?(input) && !has_letters?(input))
   end
 
-  def talkingForcefully?(input) do
+  defp talking_forcefully?(input) do
     input == String.upcase(input)
   end
 
-  def hasLetters?(input) do
+  defp has_letters?(input) do
     Regex.match?(~r/[A-Za-z]/, input)
   end
 
-  def hasNumbers?(input) do
+  defp has_numbers?(input) do
     Regex.match?(~r/[1-9]/, input)
   end
 
-  def question?(input) do
+  defp question?(input) do
     String.ends_with?(input, "?")
   end
 
-  def yellingQuestion?(input) do
+  defp yelling_question?(input) do
     question?(input) &&
-    talkingForcefully?(input) &&
-    hasLetters?(input)
+    talking_forcefully?(input) &&
+    has_letters?(input)
   end
 
 end
