@@ -24,18 +24,16 @@ defmodule Bob do
   end
 
   defp has_letters?(input) do
-    Regex.match?(~r/[A-Za-z]/, input)
+    Regex.match?(~r/[[:alpha:]]/u, input)
   end
 
   defp yelling?(input) do
-    String.trim(input) != "" &&
     talking_forcefully?(input) &&
-    !String.ends_with?(input, "?") &&
-    not (has_numbers?(input) && !has_letters?(input))
+    has_letters?(input)
   end
 
   defp has_numbers?(input) do
-    Regex.match?(~r/[1-9]/, input)
+    Regex.match?(~r/[0-9]/, input)
   end
 
 end
