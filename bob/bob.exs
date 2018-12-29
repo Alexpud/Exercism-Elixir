@@ -32,8 +32,4 @@ defmodule Bob do
     has_letters?(input)
   end
 
-  defp has_numbers?(input) do
-    Regex.match?(~r/[0-9]/, input)
-  end
-
 end
