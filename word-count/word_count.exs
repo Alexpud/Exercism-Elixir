@@ -6,8 +6,10 @@ defmodule Words do
   """
   @spec count(String.t()) :: map
   def count(sentence) do
-    sentence
-    |> String.split
+    String.normalize(sentence, :nfd)
+    |> remove_punctuation
+    |> String.downcase
+    |> split
     |> group_words_array_by_word
     |> count_grouped_words_ocurrence
     |> Map.new
@@ -19,8 +21,12 @@ defmodule Words do
     # Map.new(tuple_array)
   end
 
-  defp replace(phrase) do
-    String.replace(phrase, ~r/!&@$%^&/, "")
+  defp remove_punctuation(phrase) do
+    String.replace(phrase, ~r/(?!-|_)[[:punct:]]*[:]*/, "")
+  end
+
+  defp split(phrase) do
+    String.split(phrase, ~r/[ |_]/, trim: true)
   end
 
   defp group_words_array_by_word(words_array) do
