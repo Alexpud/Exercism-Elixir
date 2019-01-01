@@ -6,7 +6,7 @@ defmodule Words do
   """
   @spec count(String.t()) :: map
   def count(sentence) do
-    String.normalize(sentence, :nfd)
+    sentence
     |> remove_punctuation
     |> String.downcase
     |> split_string_separators
@@ -16,7 +16,7 @@ defmodule Words do
   end
 
   defp remove_punctuation(phrase) do
-    String.replace(phrase, ~r/(?!-|_)[[:punct:]]*[:]*/, "")
+    String.replace(phrase, ~r/(?!-|_)[[:punct:]]*[:]*/u, "")
   end
 
   defp split_string_separators(phrase) do
