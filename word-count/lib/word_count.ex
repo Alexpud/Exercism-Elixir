@@ -1,4 +1,4 @@
-defmodule Words do
+defmodule WordCount do
   @doc """
   Count the number of words in the sentence.
 
@@ -6,21 +6,18 @@ defmodule Words do
   """
   @spec count(String.t()) :: map
   def count(sentence) do
-    sentence
-    |> remove_punctuation
-    |> String.downcase
-    |> split_string_separators
+  	Regex.scan(~r/[^_\s,:!&@$%^&]+/u, sentence)
+  	|> List.flatten
+    |> downcase_elements
     |> group_words_array_by_word
     |> count_grouped_words_ocurrence
     |> Map.new
   end
 
-  defp remove_punctuation(phrase) do
-    String.replace(phrase, ~r/(?!-|_)[[:punct:]]*[:]*/u, "")
-  end
-
-  defp split_string_separators(phrase) do
-    String.split(phrase, ~r/[ |_]/, trim: true)
+  defp downcase_elements(elements) do
+  	for element <- elements do
+  		String.downcase(element)
+  	end
   end
 
   defp group_words_array_by_word(words_array) do
