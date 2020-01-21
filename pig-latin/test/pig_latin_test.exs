@@ -81,22 +81,22 @@ defmodule PigLatinTest do
       assert PigLatin.translate("chair") == "airchay"
     end
 
-    @tag :pending
+    #@tag :pending
     test "word beginning with qu" do
       assert PigLatin.translate("queen") == "eenquay"
     end
 
-    @tag :pending
+    #@tag :pending
     test "word beginning with qu and a preceding consonant" do
       assert PigLatin.translate("square") == "aresquay"
     end
 
-    @tag :pending
+    #@tag :pending
     test "word beginning with th" do
       assert PigLatin.translate("therapy") == "erapythay"
     end
 
-    @tag :pending
+    #@tag :pending
     test "word beginning with thr" do
       assert PigLatin.translate("thrush") == "ushthray"
     end

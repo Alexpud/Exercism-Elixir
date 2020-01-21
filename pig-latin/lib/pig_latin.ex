@@ -31,9 +31,9 @@ defmodule PigLatin do
   end
 
   defp translate_word_starting_with_consonant(word) do
-    String.graphemes(word)
-    |> Enum.take_while(fn x -> !is_voguel(x) end)
-    |> Enum.map_join(&(&1))
+    Regex.scan(~r/\b[^aeiou]+[qu]?/i, word)
+    |> Enum.flat_map(&(&1))
+    |> Enum.at(0)
     |> mount_word_start_with_consonant(word)
   end
   
