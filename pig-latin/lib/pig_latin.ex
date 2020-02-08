@@ -31,7 +31,7 @@ defmodule PigLatin do
   end
 
   defp translate_word_starting_with_consonant(word) do
-    Regex.scan(~r/\b[^aeiou]+[qu]?/i, word)
+    Regex.scan(~r/\b[^a|e|i|o|u]+[qu]?[thr]?[sch]?/ui, word)
     |> Enum.flat_map(&(&1))
     |> Enum.at(0)
     |> mount_word_start_with_consonant(word)
